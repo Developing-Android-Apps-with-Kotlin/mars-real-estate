@@ -9,18 +9,14 @@ import se.stylianosgakis.marsrealestate.repository.MarsRepository
 
 private const val BASE_URL = "https://mars.udacity.com/"
 val networkModule = module {
-    single<Retrofit> {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
+    single<Retrofit> { buildRetrofit() }
+    single<MarsApiService> { get<Retrofit>().create<MarsApiService>() }
+    single<MarsRepository> { MarsRepository(get<MarsApiService>()) }
+}
 
-    single<MarsApiService> {
-        get<Retrofit>().create()
-    }
-
-    single<MarsRepository> {
-        MarsRepository(get<MarsApiService>())
-    }
+fun buildRetrofit(): Retrofit {
+    return Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 }

@@ -34,10 +34,16 @@
             tools:listitem="@layout/grid_view_item" />
         <!--app:listData="@{viewModel.response}"-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{viewModel.response}"/>
+        <ImageView
+            android:id="@+id/status_image2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:imageUrl="@{viewModel.property.imageSource}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <ImageView
             android:id="@+id/status_image"

@@ -18,5 +18,5 @@ data class MarsProperty(
     var type: String? = null,
     @SerializedName("img_src")
     @Expose
-    var imgSrc: String? = null
+    var imageSource: String? = null
 ) : Parcelable
