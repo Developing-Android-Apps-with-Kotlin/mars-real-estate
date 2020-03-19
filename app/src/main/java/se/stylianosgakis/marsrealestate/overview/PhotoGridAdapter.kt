@@ -1,4 +1,4 @@
-package se.stylianosgakis.marsrealestate
+package se.stylianosgakis.marsrealestate.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -24,7 +24,10 @@ class PhotoGridAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarsPropertyViewHolder {
-        return MarsPropertyViewHolder.from(parent, clickListener)
+        return MarsPropertyViewHolder.from(
+            parent,
+            clickListener
+        )
     }
 
     override fun onBindViewHolder(holder: MarsPropertyViewHolder, position: Int) {
@@ -47,7 +50,10 @@ class PhotoGridAdapter(
             fun from(parent: ViewGroup, clickListener: OnClickListener): MarsPropertyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = GridViewItemBinding.inflate(layoutInflater)
-                return MarsPropertyViewHolder(binding, clickListener)
+                return MarsPropertyViewHolder(
+                    binding,
+                    clickListener
+                )
             }
         }
     }

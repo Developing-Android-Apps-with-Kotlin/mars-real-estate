@@ -13,7 +13,7 @@
 
         <variable
             name="onClickListener"
-            type="se.stylianosgakis.marsrealestate.OnClickListener" />
+            type="se.stylianosgakis.marsrealestate.overview.OnClickListener" />
     </data>
 
     <ImageView
