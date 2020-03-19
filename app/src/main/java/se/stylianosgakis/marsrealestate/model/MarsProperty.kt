@@ -1,16 +1,25 @@
 package se.stylianosgakis.marsrealestate.model
 
 import android.os.Parcelable
-import com.squareup.moshi.Json
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class MarsProperty(
-    val id: String,
-    // used to map img_src from the JSON to imgSrcUrl in our class
-    @Json(name = "img_src") val imgSrcUrl: String,
-    val type: String,
-    val price: Double) : Parcelable {
-    val isRental
-        get() = type == "rent"
+class MarsProperty : Parcelable {
+    @SerializedName("price")
+    @Expose
+    var price: Int? = null
+
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
+
+    @SerializedName("type")
+    @Expose
+    var type: String? = null
+
+    @SerializedName("img_src")
+    @Expose
+    var imgSrc: String? = null
 }

@@ -32,7 +32,12 @@
             app:spanCount="2"
             tools:itemCount="16"
             tools:listitem="@layout/grid_view_item" />
-        <!--app:listData="@{viewModel.properties}"-->
+        <!--app:listData="@{viewModel.response}"-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@{viewModel.response}"/>
 
         <ImageView
             android:id="@+id/status_image"

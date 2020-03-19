@@ -59,10 +59,6 @@ dependencies {
     implementation "androidx.core:core-ktx:$version_core"
     implementation "androidx.fragment:fragment-ktx:1.2.3"
 
-    // Moshi
-    implementation "com.squareup.moshi:moshi:$version_moshi"
-    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
-
     // Retrofit with Moshi Converter
     implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
@@ -77,8 +73,11 @@ dependencies {
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
 
+    // Gson
+    implementation "com.google.code.gson:gson:$version_gson"
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    // Retrofit Gson converter
     implementation "com.squareup.retrofit2:converter-gson:$version_retrofit"
 
     // Koin for Android
