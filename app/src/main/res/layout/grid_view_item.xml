@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
-            name="property"
+            name="marsProperty"
             type="se.stylianosgakis.marsrealestate.model.MarsProperty" />
     </data>
+
     <ImageView
         android:id="@+id/mars_image"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/description_property_picture"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/description_property_picture"
         android:padding="2dp"
+        android:scaleType="centerCrop"
+        app:imageUrl="@{marsProperty.imageSource}"
+        tools:src="@tools:sample/backgrounds/scenic" />
 
-        tools:src="@tools:sample/backgrounds/scenic"/>
-    <!--app:imageUrl="@{property.imgSrcUrl}"-->
 </layout>

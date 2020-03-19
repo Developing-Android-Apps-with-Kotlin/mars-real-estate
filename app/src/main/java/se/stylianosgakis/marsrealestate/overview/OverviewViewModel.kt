@@ -13,13 +13,13 @@ class OverviewViewModel(
 ) : ViewModel() {
     // The internal MutableLiveData String that stores the status of the most recent request
     private val _status = MutableLiveData<String>()
-    val response: LiveData<String>
+    val status: LiveData<String>
         get() = _status
 
     // The result
-    private val _property = MutableLiveData<MarsProperty>()
-    val property: LiveData<MarsProperty>
-        get() = _property
+    private val _propertyList = MutableLiveData<List<MarsProperty>>()
+    val propertyList: LiveData<List<MarsProperty>>
+        get() = _propertyList
 
     // Call getMarsRealEstateProperties() on init so we can display status immediately.
     init {
@@ -30,7 +30,7 @@ class OverviewViewModel(
     private fun getMarsRealEstateProperties() {
         viewModelScope.launch {
             val properties = repository.getProperties()
-            _property.value = properties[0]
+            _propertyList.value = properties
         }
     }
 }

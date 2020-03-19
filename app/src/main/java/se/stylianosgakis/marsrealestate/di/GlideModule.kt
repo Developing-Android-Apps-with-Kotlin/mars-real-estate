@@ -8,7 +8,7 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import se.stylianosgakis.marsrealestate.R
 
-val utilsModule = module {
+val glideModule = module {
     single<RequestOptions> { provideRequestOptions() }
     single<RequestManager> { provideRequestManager(androidApplication(), get<RequestOptions>()) }
 }

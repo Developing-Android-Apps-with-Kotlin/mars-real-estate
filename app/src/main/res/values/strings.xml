@@ -9,4 +9,5 @@
     <string name="display_price_monthly_rental">$%,.0f/month</string>
     <string name="display_price">$%,.0f</string>
     <string name="description_property_picture">Property picture</string>
+    <string name="description_loading_image">Loading image</string>
 </resources>

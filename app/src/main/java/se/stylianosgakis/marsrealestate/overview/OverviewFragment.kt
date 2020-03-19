@@ -22,6 +22,9 @@ class OverviewFragment : Fragment() {
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@OverviewFragment.viewModel
+            photosGrid.apply {
+                adapter = PhotoGridAdapter()
+            }
         }
 
         setHasOptionsMenu(true)

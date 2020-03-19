@@ -4,7 +4,7 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import se.stylianosgakis.marsrealestate.di.networkModule
-import se.stylianosgakis.marsrealestate.di.utilsModule
+import se.stylianosgakis.marsrealestate.di.glideModule
 import se.stylianosgakis.marsrealestate.di.viewModelsModule
 import timber.log.Timber
 
@@ -22,7 +22,7 @@ class App : Application() {
     private fun configureDependencyInjection() {
         startKoin {
             androidContext(this@App)
-            modules(listOf(networkModule, viewModelsModule, utilsModule))
+            modules(listOf(networkModule, viewModelsModule, glideModule))
         }
     }
 }
