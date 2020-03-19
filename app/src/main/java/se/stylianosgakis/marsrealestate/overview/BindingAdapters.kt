@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import se.stylianosgakis.marsrealestate.PhotoGridAdapter
 import se.stylianosgakis.marsrealestate.R
 import se.stylianosgakis.marsrealestate.model.MarsProperty
 

@@ -8,9 +8,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import se.stylianosgakis.marsrealestate.OnClickListener
+import se.stylianosgakis.marsrealestate.PhotoGridAdapter
 import se.stylianosgakis.marsrealestate.R
 import se.stylianosgakis.marsrealestate.databinding.FragmentOverviewBinding
+import se.stylianosgakis.marsrealestate.model.MarsProperty
 
 class OverviewFragment : Fragment() {
     private val viewModel by viewModel<OverviewViewModel>()
@@ -23,9 +28,22 @@ class OverviewFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@OverviewFragment.viewModel
             photosGrid.apply {
-                adapter = PhotoGridAdapter()
+                adapter = PhotoGridAdapter(
+                    OnClickListener(
+                        itemClickedListener
+                    )
+                )
             }
         }
+
+        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer { marsProperty ->
+            marsProperty?.let {
+                findNavController().navigate(
+                    OverviewFragmentDirections.actionShowDetail(it)
+                )
+                viewModel.navigateToPropertyDetailsComplete()
+            }
+        })
 
         setHasOptionsMenu(true)
         return binding.root
@@ -44,5 +62,9 @@ class OverviewFragment : Fragment() {
             R.id.show_buy_menu -> TODO()
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private val itemClickedListener: (marsProperty: MarsProperty) -> Unit = { marsProperty ->
+        viewModel.triggerNavigateToPropertyDetails(marsProperty)
     }
 }

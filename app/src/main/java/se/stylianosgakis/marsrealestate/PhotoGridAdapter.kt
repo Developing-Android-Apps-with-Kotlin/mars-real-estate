@@ -1,4 +1,4 @@
-package se.stylianosgakis.marsrealestate.overview
+package se.stylianosgakis.marsrealestate
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import se.stylianosgakis.marsrealestate.databinding.GridViewItemBinding
 import se.stylianosgakis.marsrealestate.model.MarsProperty
 
-class PhotoGridAdapter :
-    ListAdapter<MarsProperty, PhotoGridAdapter.MarsPropertyViewHolder>(MarsPropertyDiffCallback()) {
+class PhotoGridAdapter(
+    private val clickListener: OnClickListener
+) : ListAdapter<MarsProperty, PhotoGridAdapter.MarsPropertyViewHolder>(
+    MarsPropertyDiffCallback()
+) {
     class MarsPropertyDiffCallback : DiffUtil.ItemCallback<MarsProperty>() {
         override fun areItemsTheSame(oldItem: MarsProperty, newItem: MarsProperty): Boolean {
             return oldItem.id == newItem.id
@@ -21,7 +24,7 @@ class PhotoGridAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarsPropertyViewHolder {
-        return MarsPropertyViewHolder.from(parent)
+        return MarsPropertyViewHolder.from(parent, clickListener)
     }
 
     override fun onBindViewHolder(holder: MarsPropertyViewHolder, position: Int) {
@@ -29,21 +32,29 @@ class PhotoGridAdapter :
     }
 
     class MarsPropertyViewHolder(
-        private val binding: GridViewItemBinding
+        private val binding: GridViewItemBinding,
+        private val clickListener: OnClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MarsProperty) {
             binding.apply {
                 marsProperty = item
+                onClickListener = clickListener
                 executePendingBindings()
             }
         }
 
         companion object {
-            fun from(parent: ViewGroup): MarsPropertyViewHolder {
+            fun from(parent: ViewGroup, clickListener: OnClickListener): MarsPropertyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = GridViewItemBinding.inflate(layoutInflater)
-                return MarsPropertyViewHolder(binding)
+                return MarsPropertyViewHolder(binding, clickListener)
             }
         }
     }
+}
+
+class OnClickListener(
+    val clickListener: (marsProperty: MarsProperty) -> Unit
+) {
+    fun onClick(marsProperty: MarsProperty) = clickListener(marsProperty)
 }

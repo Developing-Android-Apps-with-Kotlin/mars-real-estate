@@ -10,6 +10,10 @@
         <variable
             name="marsProperty"
             type="se.stylianosgakis.marsrealestate.model.MarsProperty" />
+
+        <variable
+            name="onClickListener"
+            type="se.stylianosgakis.marsrealestate.OnClickListener" />
     </data>
 
     <ImageView
@@ -18,6 +22,7 @@
         android:layout_height="170dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/description_property_picture"
+        android:onClick="@{() -> onClickListener.onClick(marsProperty)}"
         android:padding="2dp"
         android:scaleType="centerCrop"
         app:imageUrl="@{marsProperty.imageSource}"

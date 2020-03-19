@@ -24,6 +24,19 @@ class OverviewViewModel(
     val propertyList: LiveData<List<MarsProperty>>
         get() = _propertyList
 
+    // Navigation
+    private val _navigateToSelectedProperty = MutableLiveData<MarsProperty?>()
+    val navigateToSelectedProperty: LiveData<MarsProperty?>
+        get() = _navigateToSelectedProperty
+
+    fun triggerNavigateToPropertyDetails(marsProperty: MarsProperty) {
+        _navigateToSelectedProperty.value = marsProperty
+    }
+
+    fun navigateToPropertyDetailsComplete() {
+        _navigateToSelectedProperty.value = null
+    }
+
     // Call getMarsRealEstateProperties() on init so we can display status immediately.
     init {
         getMarsRealEstateProperties()
