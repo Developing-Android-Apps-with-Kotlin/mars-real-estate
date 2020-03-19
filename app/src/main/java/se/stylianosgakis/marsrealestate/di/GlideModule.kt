@@ -9,6 +9,8 @@ import org.koin.dsl.module
 import se.stylianosgakis.marsrealestate.R
 
 val glideModule = module {
+    //TODO Manage to inject the Glide instance in the BindAdapter method
+    // link: https://stackoverflow.com/questions/60763561/how-to-provide-something-through-di-koin-to-a-bindingadapter-method
     single<RequestOptions> { provideRequestOptions() }
     single<RequestManager> { provideRequestManager(androidApplication(), get<RequestOptions>()) }
 }

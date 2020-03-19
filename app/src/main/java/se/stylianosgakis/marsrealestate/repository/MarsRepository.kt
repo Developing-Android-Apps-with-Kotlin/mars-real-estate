@@ -13,3 +13,12 @@ class MarsRepository(
         }
     }
 }
+
+suspend inline fun <T> safeApiCall(responseFunction: suspend () -> T): T? {
+    return try {
+        responseFunction()
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
+}

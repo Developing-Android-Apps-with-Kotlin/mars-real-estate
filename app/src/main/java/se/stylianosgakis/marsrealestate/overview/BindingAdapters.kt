@@ -1,5 +1,6 @@
 package se.stylianosgakis.marsrealestate.overview
 
+import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -21,6 +22,23 @@ fun ImageView.bindImage(imageUrl: String?) {
                     .error(R.drawable.ic_broken_image)
             )
             .into(this)
+    }
+}
+
+@BindingAdapter("apiStatus")
+fun ImageView.bindStatus(status: ApiStatus?) {
+    when (status) {
+        ApiStatus.LOADING -> {
+            this.visibility = View.VISIBLE
+            this.setImageResource(R.drawable.loading_animation)
+        }
+        ApiStatus.ERROR -> {
+            this.visibility = View.VISIBLE
+            this.setImageResource(R.drawable.ic_connection_error)
+        }
+        ApiStatus.DONE -> {
+            this.visibility = View.GONE
+        }
     }
 }
 
