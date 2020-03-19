@@ -7,12 +7,12 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import se.stylianosgakis.marsrealestate.R
 import se.stylianosgakis.marsrealestate.databinding.FragmentOverviewBinding
 
 class OverviewFragment : Fragment() {
-    private val viewModel by viewModels<OverviewViewModel>()
+    private val viewModel by viewModel<OverviewViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

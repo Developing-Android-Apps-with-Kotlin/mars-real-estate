@@ -1,4 +1,4 @@
-package se.stylianosgakis.marsrealestate.network
+package se.stylianosgakis.marsrealestate.model
 
 import android.os.Parcelable
 import com.squareup.moshi.Json

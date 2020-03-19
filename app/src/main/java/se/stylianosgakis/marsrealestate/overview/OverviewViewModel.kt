@@ -3,8 +3,13 @@ package se.stylianosgakis.marsrealestate.overview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import se.stylianosgakis.marsrealestate.repository.MarsRepository
 
-class OverviewViewModel : ViewModel() {
+class OverviewViewModel(
+    private val repository: MarsRepository
+) : ViewModel() {
     // The internal MutableLiveData String that stores the status of the most recent request
     private val _response = MutableLiveData<String>()
     val response: LiveData<String>
@@ -17,6 +22,9 @@ class OverviewViewModel : ViewModel() {
 
     // Sets the value of the status LiveData to the Mars API status.
     private fun getMarsRealEstateProperties() {
-        _response.value = "Set the Mars API Response here!"
+        viewModelScope.launch {
+            val properties = repository.getProperties()
+            _response.value = properties.toString()
+        }
     }
 }

@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import se.stylianosgakis.marsrealestate.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
-    private val viewModel by viewModels<DetailViewModel> {
-        val application = requireNotNull(this.activity).application
+    private val viewModel: DetailViewModel by viewModel {
         val arguments = DetailFragmentArgs.fromBundle(requireArguments())
-        DetailViewModelFactory(arguments.selectedProperty, application)
+        parametersOf(arguments.selectedProperty)
     }
 
     override fun onCreateView(

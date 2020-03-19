@@ -28,7 +28,7 @@
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="selectedProperty"
-            app:argType="se.stylianosgakis.marsrealestate.network.MarsProperty" />
+            app:argType="se.stylianosgakis.marsrealestate.model.MarsProperty" />
     </fragment>
 
 </navigation>
