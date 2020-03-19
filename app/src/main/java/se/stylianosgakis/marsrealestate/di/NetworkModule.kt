@@ -6,8 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import se.stylianosgakis.marsrealestate.repository.MarsApiService
 import se.stylianosgakis.marsrealestate.repository.MarsRepository
+import se.stylianosgakis.marsrealestate.util.BASE_URL
 
-private const val BASE_URL = "https://mars.udacity.com/"
 val networkModule = module {
     single<Retrofit> { buildRetrofit() }
     single<MarsApiService> { get<Retrofit>().create<MarsApiService>() }

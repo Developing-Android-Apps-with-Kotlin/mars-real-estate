@@ -8,7 +8,6 @@ import se.stylianosgakis.marsrealestate.model.MarsProperty
 import se.stylianosgakis.marsrealestate.overview.OverviewViewModel
 import se.stylianosgakis.marsrealestate.repository.MarsRepository
 
-private const val BASE_URL = "https://mars.udacity.com/"
 val viewModelsModule = module {
     viewModel<OverviewViewModel> { OverviewViewModel(get<MarsRepository>()) }
     viewModel<DetailViewModel> { (marsProperty: MarsProperty) ->

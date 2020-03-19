@@ -14,6 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import se.stylianosgakis.marsrealestate.R
 import se.stylianosgakis.marsrealestate.databinding.FragmentOverviewBinding
 import se.stylianosgakis.marsrealestate.model.MarsProperty
+import se.stylianosgakis.marsrealestate.util.ApiFilter
 
 class OverviewFragment : Fragment() {
     private val viewModel by viewModel<OverviewViewModel>()
@@ -48,6 +49,11 @@ class OverviewFragment : Fragment() {
         return binding.root
     }
 
+    // On click for the recyclerView
+    private val itemClickedListener: (marsProperty: MarsProperty) -> Unit = { marsProperty ->
+        viewModel.triggerNavigateToPropertyDetails(marsProperty)
+    }
+
     // Filtering options overflow menu
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.overflow_menu, menu)
@@ -55,15 +61,13 @@ class OverviewFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.show_all_menu -> TODO()
-            R.id.show_rent_menu -> TODO()
-            R.id.show_buy_menu -> TODO()
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private val itemClickedListener: (marsProperty: MarsProperty) -> Unit = { marsProperty ->
-        viewModel.triggerNavigateToPropertyDetails(marsProperty)
+        viewModel.getMarsRealEstateProperties(
+            when (item.itemId) {
+                R.id.show_rent_menu -> ApiFilter.SHOW_RENT
+                R.id.show_buy_menu -> ApiFilter.SHOW_BUY
+                else -> ApiFilter.SHOW_ALL
+            }
+        )
+        return true
     }
 }

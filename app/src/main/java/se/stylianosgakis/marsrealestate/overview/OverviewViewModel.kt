@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import se.stylianosgakis.marsrealestate.model.MarsProperty
 import se.stylianosgakis.marsrealestate.repository.MarsRepository
 import se.stylianosgakis.marsrealestate.repository.safeApiCall
+import se.stylianosgakis.marsrealestate.util.ApiFilter
 
 enum class ApiStatus { LOADING, ERROR, DONE }
 
@@ -43,10 +44,10 @@ class OverviewViewModel(
     }
 
     // Sets the value of the status LiveData to the Mars API status.
-    private fun getMarsRealEstateProperties() {
+    fun getMarsRealEstateProperties(filter: ApiFilter = ApiFilter.SHOW_ALL) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
-            val properties = safeApiCall { repository.getProperties() }
+            val properties = safeApiCall { repository.getProperties(filter.value) }
             if (properties == null) {
                 _propertyList.value = listOf()
                 _status.value = ApiStatus.ERROR
