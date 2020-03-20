@@ -16,23 +16,19 @@ class DetailViewModel(
         get() = _selectedProperty
 
     // Formatting LiveData
-    val displayPropertyPrice: LiveData<String> = Transformations.map(selectedProperty) {
-        app.applicationContext.getString(
-            when (it.isRental) {
-                true -> R.string.display_price_monthly_rental
-                false -> R.string.display_price
-            }, it.price
-        )
+    val displayPropertyPrice = Transformations.map(selectedProperty) {
+        val typeResource = when (it.isRental) {
+            true -> R.string.display_price_monthly_rental
+            false -> R.string.display_price
+        }
+        app.applicationContext.getString(typeResource, it.price)
     }
-    val displayPropertyType: LiveData<String> = Transformations.map(selectedProperty) {
-        app.applicationContext.getString(
-            R.string.display_type,
-            app.applicationContext.getString(
-                when (it.isRental) {
-                    true -> R.string.type_rent
-                    false -> R.string.type_sale
-                }
-            )
-        )
+    val displayPropertyType = Transformations.map(selectedProperty) {
+        val typeResource = when (it.isRental) {
+            true -> R.string.type_rent
+            false -> R.string.type_sale
+        }
+        val typeString = app.applicationContext.getString(typeResource)
+        app.applicationContext.getString(R.string.display_type, typeString)
     }
 }
