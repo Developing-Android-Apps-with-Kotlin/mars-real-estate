@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import se.stylianosgakis.marsrealestate.model.MarsProperty
 import se.stylianosgakis.marsrealestate.repository.MarsRepository
-import se.stylianosgakis.marsrealestate.repository.safeApiCall
 import se.stylianosgakis.marsrealestate.util.ApiFilter
 
 enum class ApiStatus { LOADING, ERROR, DONE }
@@ -47,12 +46,11 @@ class OverviewViewModel(
     fun getMarsRealEstateProperties(filter: ApiFilter = ApiFilter.SHOW_ALL) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
-            val propertiesList = safeApiCall { repository.getProperties(filter.value) }
-            if (propertiesList == null) {
-                _propertyList.value = listOf()
+            val propertiesList = repository.getProperties(filter.value)
+            _propertyList.value = propertiesList
+            if (propertiesList.isEmpty()) {
                 _status.value = ApiStatus.ERROR
             } else {
-                _propertyList.value = propertiesList
                 _status.value = ApiStatus.DONE
             }
         }
