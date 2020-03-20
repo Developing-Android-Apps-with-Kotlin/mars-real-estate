@@ -47,12 +47,12 @@ class OverviewViewModel(
     fun getMarsRealEstateProperties(filter: ApiFilter = ApiFilter.SHOW_ALL) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
-            val properties = safeApiCall { repository.getProperties(filter.value) }
-            if (properties == null) {
+            val propertiesList = safeApiCall { repository.getProperties(filter.value) }
+            if (propertiesList == null) {
                 _propertyList.value = listOf()
                 _status.value = ApiStatus.ERROR
             } else {
-                _propertyList.value = properties
+                _propertyList.value = propertiesList
                 _status.value = ApiStatus.DONE
             }
         }
