@@ -11,17 +11,17 @@ import org.koin.core.inject
 import se.stylianosgakis.marsrealestate.R
 import se.stylianosgakis.marsrealestate.model.MarsProperty
 
-object GlideInstance : KoinComponent {
-    val glide: RequestManager by inject()
-}
+object BindingAdapters : KoinComponent {
+    private val glide: RequestManager by inject()
 
-@BindingAdapter("imageUrl")
-fun ImageView.bindImage(imageUrl: String?) {
-    imageUrl?.let { url ->
-        val parsedImageUrl = url.toUri().buildUpon().scheme("https").build()
-        GlideInstance.glide
-            .load(parsedImageUrl)
-            .into(this)
+    @JvmStatic
+    @BindingAdapter("imageUrl")
+    fun ImageView.bindImage(imageUrl: String?) {
+        imageUrl?.let { url ->
+            val parsedImageUrl = url.toUri().buildUpon().scheme("https").build()
+            glide.load(parsedImageUrl)
+                .into(this)
+        }
     }
 }
 
